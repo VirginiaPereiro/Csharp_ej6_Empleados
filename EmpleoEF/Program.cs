@@ -20,7 +20,8 @@ namespace EmpleoEF
             {
                 Console.WriteLine("1.Dar de alta\n2.Buscar por id\n3.Buscar por salario" +
                                   "\n4.Dar de baja\n5.Salario medio de empleados\n6.Empleados por proyecto" +
-                                  "\n7.Proyectos por empleado\n8.Empleados por nombre\n9.Salir");
+                                  "\n7.Proyectos por empleado\n8.Mostrar todos los empleados por nombre" +
+                                  "\n9.Buscar empleados por nombre\n10.Salir");
                 Int32.TryParse(Console.ReadLine(), out opcion);
 
                 switch (opcion)
@@ -50,13 +51,16 @@ namespace EmpleoEF
                         EmpleadosNombre();
                         break;
                     case 9:
+                        EmpleadosPorNombre();
+                        break;
+                    case 10:
                         break;
                     default:
                         Console.WriteLine("Opción incorrecta");
                         break;
                 }
 
-            } while (opcion != 9);
+            } while (opcion != 10);
 
         }
 
@@ -180,7 +184,8 @@ namespace EmpleoEF
 
             foreach (var empleado in empleados)
             {
-                Console.WriteLine(empleado.nombre);
+                Console.WriteLine("El empleado{0} con el salario {1} participan en el proyecto juntos",
+                    empleado.nombre, empleado.salario);
             }
         }
 
@@ -195,7 +200,8 @@ namespace EmpleoEF
 
             foreach (var proyecto in proyectos)
             {
-                Console.WriteLine(proyecto.Nombre);
+                Console.WriteLine("El proyecto {0} cuya descripción es {1} y su cliente es {2}",
+                    proyecto.Nombre,proyecto.Descripcion,proyecto.Cliente);
             }
         }
 
@@ -209,6 +215,20 @@ namespace EmpleoEF
                 Console.WriteLine(empleado);  
             }
             
+        }
+
+        private static void EmpleadosPorNombre()
+        {
+            Console.WriteLine("Introduzca nombre");
+            var newNombre = Console.ReadLine();
+
+            var empleados = ie.EmpleadosPorNombre(newNombre);
+
+            foreach (var empleado in empleados)
+            {
+                Console.WriteLine(empleado.nombre);
+            }
+
         }
 
     }

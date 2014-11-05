@@ -59,5 +59,10 @@ namespace EmpleoEF
             var nombres = db.Empleado.Select(o => o.nombre);
             return nombres.ToArray();
         }
+
+        public IEnumerable<Empleado> EmpleadosPorNombre(String nombre)
+        {
+            return db.Empleado.Where(o => o.nombre.Contains(nombre));
+        }
     }
 }
